@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
 """
-Top students
+Where can I learn Python?
 """
 
 
-def top_students(mongo_collection):
+def schools_by_topic(mongo_collection, topic):
     """
-    returns all students sorted by average score
+     returns the list of school having a specific topic
+
     :param mongo_collection:
+    :param topic:
     :return:
     """
-    return mongo_collection.aggregate([
-        {"$project": {
-            "name": "$name",
-            "averageScore": {"$avg": "$topics.score"}
-        }},
-        {"$sort": {"averageScore": -1}}
-    ])
+    return mongo_collection.find({"topics": topic})
